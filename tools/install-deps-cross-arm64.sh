@@ -321,13 +321,13 @@ if ! ${USE_CACHE} || [ ! -d /usr/local/aarch64-linux-gnu ] || [ ! -d ${NATIVE_PR
         cp bin/ddsconf /usr/local/bin
         cd ../..
         mkdir -p ros2_build/src && cd ros2_build
-        vcs import --input https://raw.githubusercontent.com/ros2/ros2/release-galactic-20221209/ros2.repos src
+        vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src
         rosdep init
         rosdep update
         # Without setting PythonExtra_EXTENSION_SUFFIX the .so file are aarch64 but have x86_64 in the name
         colcon build \
             --merge-install \
-            --install-base /opt/ros/galactic \
+            --install-base /opt/ros/humble \
             --packages-up-to rclcpp rosbag2 sensor_msgs \
             --cmake-args \
             -DCMAKE_TOOLCHAIN_FILE=/usr/local/aarch64-linux-gnu/lib/cmake/arm64-toolchain.cmake \
