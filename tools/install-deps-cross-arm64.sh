@@ -217,6 +217,7 @@ if ! ${USE_CACHE} || [ ! -d /usr/local/aarch64-linux-gnu ] || [ ! -d ${NATIVE_PR
         --enable-ipv6
         --with-ssl
         --disable-unix-sockets
+        --without-brotli
         --disable-rtsp
         --without-zstd
         --host=aarch64-linux
