@@ -194,6 +194,7 @@ if ${INSTALL_BUILD_TIME_DEPS} && ( ! ${USE_CACHE} || [ ! -d ${PREFIX} ] ); then
         --disable-unix-sockets
         --disable-rtsp
         --without-zstd
+        --without-brotli
         --without-ca-bundle
         --without-ca-path
         --with-ca-fallback
