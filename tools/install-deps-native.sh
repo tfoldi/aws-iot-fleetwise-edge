@@ -75,13 +75,13 @@ if ${WITH_ROS2_SUPPORT}; then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" > /etc/apt/sources.list.d/ros2.list
     apt update
     apt install -y \
-        ros-galactic-rclcpp \
-        ros-galactic-rosbag2 \
-        ros-galactic-ros2topic \
-        ros-galactic-sensor-msgs
+        ros-humble-rclcpp \
+        ros-humble-rosbag2 \
+        ros-humble-ros2topic \
+        ros-humble-sensor-msgs
     if ${INSTALL_BUILD_TIME_DEPS}; then
         apt install -y \
-            ros-galactic-rosidl-default-generators \
+            ros-humble-rosidl-default-generators \
             python3-colcon-common-extensions
     fi
 fi
