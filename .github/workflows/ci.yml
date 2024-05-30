@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.8"
+          python-version: "3.10"
       - run: sudo apt-get install expect
       - run: pip install pre-commit
       - run: unbuffer pre-commit run --all-files
@@ -53,6 +53,18 @@ jobs:
           cache-paths: /usr/local/aarch64-linux-gnu:/usr/local/x86_64-linux-gnu
           dist-files: build/aws-iot-fleetwise-edge:.
 
+  build-armhf:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: "./.github/template/fwe-build"
+        with:
+          build-arch: "cross-armhf"
+          upload-arch: "armhf"
+          extra-options: "--with-iwave-gps-support"
+          dist-name: "aws-iot-fleetwise-edge"
+          cache-paths: /usr/local/arm-linux-gnueabihf:/usr/local/x86_64-linux-gnu
+          dist-files: build/aws-iot-fleetwise-edge:.
 
   build-ros2-amd64:
     runs-on: ubuntu-22.04
@@ -86,6 +98,7 @@ jobs:
     needs:
       - build-amd64
       - build-arm64
+      - build-armhf
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -97,6 +110,9 @@ jobs:
           mkdir -p linux/arm64
           mv aws-iot-fleetwise-edge-arm64/aws-iot-fleetwise-edge-arm64.tar.gz linux/arm64/aws-iot-fleetwise-edge.tar.gz
           tar -zcf linux/arm64/opt.tar.gz -T /dev/null # Create empty tar.gz
+          mkdir -p linux/arm/v7
+          mv aws-iot-fleetwise-edge-armhf/aws-iot-fleetwise-edge-armhf.tar.gz linux/arm/v7/aws-iot-fleetwise-edge.tar.gz
+          tar -zcf linux/arm/v7/opt.tar.gz -T /dev/null # Create empty tar.gz          
       - uses: "./.github/template/docker-build"
         with:
           dist-name: aws-iot-fleetwise-edge
