@@ -25,7 +25,7 @@ parse_args() {
 parse_args "$@"
 
 if ${WITH_ROS2_SUPPORT}; then
-    source /opt/ros/galactic/setup.bash
+    source /opt/ros/humble/setup.bash
     # colcon hides the test output, so use tail in the background.
     tail -F log/latest_test/iotfleetwise/stdout_stderr.log &
     colcon test --return-code-on-test-failure
