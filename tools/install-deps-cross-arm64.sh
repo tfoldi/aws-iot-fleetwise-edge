@@ -315,7 +315,7 @@ if ! ${USE_CACHE} || [ ! -d /usr/local/aarch64-linux-gnu ] || [ ! -d ${NATIVE_PR
         apt install -y \
             ros-dev-tools
         git clone -b release/humble/cyclonedds https://github.com/ros2-gbp/cyclonedds-release.git
-        cd cyclonedds
+        cd cyclonedds-release
         mkdir build && cd build
         cmake ..
         make install -j`nproc`
