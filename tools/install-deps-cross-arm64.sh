@@ -319,7 +319,7 @@ if ! ${USE_CACHE} || [ ! -d /usr/local/aarch64-linux-gnu ] || [ ! -d ${NATIVE_PR
         mkdir build && cd build
         cmake ..
         make install -j`nproc`
-        cp bin/ddsconf /usr/local/bin
+        [ -f bin/ddsconf ] && cp bin/ddsconf /usr/local/bin
         cd ../..
         mkdir -p ros2_build/src && cd ros2_build
         vcs import --input https://raw.githubusercontent.com/ros2/ros2/humble/ros2.repos src
